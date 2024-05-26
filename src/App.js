@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import ToDo from "./components/ToDo";
+import { addToDo, getAllToDo, deleteToDoHandel, updateToDoHandel } from "./utils/HandleApi";
 
 function App() {
+
+  const [getToDo, setToDo] = useState([])
+  const [getText, setText] = useState("")
+
+  useEffect(() => {
+    getAllToDo(setToDo)
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container">
+        <h1>Einkaufszettel</h1>
+      
+        <div className="top">
+          <input
+          type="text"
+          placeholder="Add something.."
+          value={getText}
+          onChange={(e) => setText(e.target.value)}/>
+          <div className="add" onClick={() => (getText) && addToDo(getText, setText, setToDo)}>Add</div>
+        </div>
+        <div className="list">
+
+          {getToDo.map((item) => <ToDo
+          key={item._id}
+          text={item.text}
+          doneToDo={item.done}
+          deleteToDo = {() => deleteToDoHandel(item._id, setToDo)} 
+          updateMode = {() => updateToDoHandel(item._id, setToDo)} 
+          />)}
+        </div>
+      </div>
     </div>
   );
 }
