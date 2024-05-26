@@ -7,8 +7,10 @@ const getAllToDo = (setToDo) => {
     .get(baseUrl)
     .then(({data}) => {
         console.log('data', data);
+        data.sort((a, b) => a.text.localeCompare(b.text));
         setToDo(data);
     })
+    .catch((err) => console.log(err))
 }
 
 const addToDo = (text, setText, setToDo) =>{
@@ -19,6 +21,7 @@ const addToDo = (text, setText, setToDo) =>{
         setText("")
         getAllToDo(setToDo)
     })
+    .catch((err) => console.log(err))
 }
 
 const updateToDoHandel = (_id, setToDo) =>{
