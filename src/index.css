@@ -59,6 +59,10 @@ input{
   border-radius: 5px;
 }
 
+.todo_done{
+  background-color: #16541e;
+}
+
 .icons{
   position: relative;
   gap: 0.5rem;
@@ -71,7 +75,7 @@ input{
 
 .text{
   font-size: large;
-  font-weight:normal;
+  font-weight: bold;
 }
 
 .line_through{
