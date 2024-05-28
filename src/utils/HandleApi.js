@@ -8,6 +8,7 @@ const getAllToDo = (setToDo) => {
     .then(({data}) => {
         console.log('data', data);
         data.sort((a, b) => a.text.localeCompare(b.text));
+        data.sort((x, y) => Number(y.done) - Number(x.done));
         setToDo(data);
     })
     .catch((err) => console.log(err))
